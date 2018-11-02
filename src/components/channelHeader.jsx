@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Container = styled.nav`
   background-color: #36393f;
   border-bottom: 2px #292b2f solid;
-  font-size: 1.1em;
+  font-size: 1.2em;
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -17,7 +17,7 @@ export default class ChannelHeader extends Component {
 
     return (
       <Container {...this.props}>
-        <h3>{activeChannelTopic}</h3>
+        <h5>{activeChannelTopic}</h5>
       </Container>
     );
   }

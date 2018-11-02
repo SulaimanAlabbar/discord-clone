@@ -50,18 +50,31 @@ class ServerView extends Component {
     const {
       username,
       avatar,
+      servers,
+      channels,
+      members,
+      activeServerIndex,
       activeServerName,
+      activeChannelIndex,
       activeChannelTopic
     } = this.props;
     return (
       <Container {...this.props}>
-        <ServersBar className="sb" />
+        <ServersBar
+          className="sb"
+          servers={servers}
+          activeServerIndex={activeServerIndex}
+        />
         <ServerHeader className="sh" activeServerName={activeServerName} />
-        <ChannelsBar className="cb" />
+        <ChannelsBar
+          className="cb"
+          channels={channels}
+          activeChannelIndex={activeChannelIndex}
+        />
         <UserPanel className="usp" username={username} avatar={avatar} />
         <ChannelHeader className="ch" activeChannelTopic={activeChannelTopic} />
         <ChatView className="cv" />
-        <MemberList className="ml" />
+        <MemberList className="ml" members={members} />
       </Container>
     );
   }
@@ -70,7 +83,12 @@ class ServerView extends Component {
 const mapStateToProps = state => ({
   username: state.username,
   avatar: state.avatar,
+  servers: state.servers,
+  channels: state.servers[state.activeServerIndex].channels,
+  members: state.servers[state.activeServerIndex].members,
+  activeServerIndex: state.activeServerIndex,
   activeServerName: state.servers[state.activeServerIndex].name,
+  activeChannelIndex: state.activeChannelsIndices[state.activeServerIndex],
   activeChannelTopic:
     state.servers[state.activeServerIndex].channels[
       state.activeChannelsIndices[state.activeServerIndex]
