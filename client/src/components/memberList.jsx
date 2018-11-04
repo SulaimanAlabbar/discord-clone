@@ -5,13 +5,13 @@ const Container = styled.nav`
   background-color: #2f3136;
   color: #a4a6aa;
   user-select: none;
-  cursor: pointer;
 
   ul {
     padding-top: 20px;
     list-style-type: none;
   }
   li {
+    cursor: pointer;
     padding: 5px 20px;
     font-size: 1.2em;
     font-weight: 500;
@@ -93,10 +93,3 @@ export default class MemberList extends Component {
     );
   }
 }
-
-// {members.map((member, index) => (
-//   <li key={index}>
-//     <img src={member.avatar} alt="avatar" />
-//     <p>{member.name}</p>
-//   </li>
-// ))}

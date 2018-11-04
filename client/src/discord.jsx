@@ -24,8 +24,4 @@ const mapStateToProps = state => ({
   activeServer: state
 });
 
-// const mapDispatchToProps = {
-
-// }
-
 export default connect(mapStateToProps)(Discord);
