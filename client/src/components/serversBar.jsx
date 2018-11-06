@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import * as actionCreators from "../actions";
+import * as actionCreators from "../modules/actions";
 
 const Container = styled.nav`
   background-color: #202225;

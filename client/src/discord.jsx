@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ServerView from "./windows/serverView";
+import ServerPage from "./pages/serverPage";
 import styled from "styled-components";
 //Three main pages.
 // 1) Home
@@ -14,7 +14,7 @@ class Discord extends Component {
     //console.log(this.props);
     return (
       <Container>
-        <ServerView />
+        <ServerPage />
       </Container>
     );
   }

@@ -49,7 +49,7 @@ const Container = styled.section`
   }
 `;
 
-class ServerView extends Component {
+class ServerPage extends Component {
   render() {
     const {
       username,
@@ -114,4 +114,4 @@ const mapStateToProps = state => ({
 
 // }
 
-export default connect(mapStateToProps)(ServerView);
+export default connect(mapStateToProps)(ServerPage);

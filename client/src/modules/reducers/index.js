@@ -13,8 +13,7 @@ const initialState = {
     {
       name: "server1",
       id: 987,
-      icon:
-        "http://www.jmkxyy.com/discord-server-icon-maker/discord-server-icon-maker-5.jpg",
+      icon: "https://i.imgur.com/3XzFlxU.png",
       channels: [
         {
           name: "first-channel",
@@ -82,8 +81,7 @@ const initialState = {
     {
       name: "server2",
       id: 5672,
-      icon:
-        "http://chittagongit.com//images/discord-chat-icon/discord-chat-icon-7.jpg",
+      icon: "https://i.imgur.com/7kBg3tL.png",
       channels: [
         {
           name: "first-channel",
@@ -107,7 +105,7 @@ const initialState = {
           avatar: "https://i.imgur.com/L8RLq3o.jpg"
         },
         {
-          name: "User6677",
+          name: "User6767",
           id: 998,
           avatar: "https://i.imgur.com/HnTWfFc.png"
         },
