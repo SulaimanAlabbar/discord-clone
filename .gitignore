@@ -3,7 +3,6 @@
 # dependencies
 client/node_modules
 server/node_modules
-/.vscode/settings.json
 /.pnp
 .pnp.js
 
@@ -25,3 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 log.txt
+/.vscode/settings.json
