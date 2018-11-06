@@ -14,3 +14,5 @@ export default () => {
     console.log(res);
   });
 };
+
+//handle connection loss
