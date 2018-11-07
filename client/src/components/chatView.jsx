@@ -63,7 +63,7 @@ export default class ChatView extends Component {
         <ul>
           {messages.map((message, index) => {
             const member = members.find(
-              member => member.id === message.authorId
+              member => member.id === message.memberId
             );
 
             return (

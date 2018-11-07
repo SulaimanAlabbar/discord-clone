@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import * as actionCreators from "../modules/actions";
+import sendMessage from "../modules/socket/serverCom/sendMessage";
+const uuid = require("uuid/v4");
 
 const Container = styled.section`
   background-color: #36393f;
@@ -34,11 +36,14 @@ class InputPanel extends Component {
 
   handleInputChange(e) {
     if (e.key === "Enter") {
-      this.props.sendMessage({
-        authorId: this.props.userId,
+      sendMessage({
+        id: uuid(),
         timestamp: new Date(),
-        content: e.target.value
+        content: e.target.value,
+        memberId: this.props.userId,
+        channelId: this.props.channelId
       });
+
       this.props.setInputPanelText("");
     } else this.props.setInputPanelText(e.target.value);
   }
@@ -65,7 +70,11 @@ const mapStateToProps = state => ({
     state.servers[state.activeServerIndex].channels[
       state.activeChannelsIndices[state.activeServerIndex]
     ].inputText,
-  userId: state.userId
+  userId: state.userId,
+  channelId:
+    state.servers[state.activeServerIndex].channels[
+      state.activeChannelsIndices[state.activeServerIndex]
+    ].id
 });
 
 const mapDispatchToProps = actionCreators;

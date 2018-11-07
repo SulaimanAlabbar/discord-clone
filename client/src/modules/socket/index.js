@@ -1,18 +1,40 @@
 import config from "../../config.json";
+import { store } from "../../index";
+import * as actionCreators from "../actions";
 const io = require("socket.io-client");
 
-export default () => {
-  const socket = io.connect(config.serverIp);
+export default async () => {
+  try {
+  } catch (error) {}
 
-  socket.emit("hello", "world");
+  // socket.on("connection", () => {
+  //   console.log("cccc");
+  //   console.log(socket.connected);
+  // });
+  // socket.emit("connect", () => {
+  //   console.log("cccc");
+  //   console.log(socket.connected);
+  // });
 
-  socket.on("rara", () => {
-    console.log("aaaaa");
-  });
+  //   socket.on("connected", () => {
+  //     console.log("mmmmm");
+  //     console.log(socket.connected);
+  //   });
 
-  socket.on("response msg", res => {
-    console.log(res);
-  });
+  //   if (socket.disconnected) {
+  //     socket.disconnect();
+  //     throw "Couldn't connect to server";
+  //   }
+
+  //   socket.on("connection", socket => {
+  //     console.log("zzzz");
+  //     store.dispatch(actionCreators.setConnectionStatus("connected"));
+  //     console.log("Connected successfully to server");
+  //   });
+  // } catch (error) {
+  //   store.dispatch(actionCreators.setConnectionStatus("disconnected"));
+  //   console.error(error);
+  // }
 };
 
 //handle connection loss

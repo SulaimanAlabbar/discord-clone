@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ServerPage from "./pages/serverPage";
+import Loading from "./pages/loading";
+import getCurrentPage from "./utils/getCurrentPage";
 import styled from "styled-components";
 //Three main pages.
 // 1) Home
@@ -11,17 +13,21 @@ const Container = styled.div``;
 
 class Discord extends Component {
   render() {
-    //console.log(this.props);
-    return (
-      <Container>
-        <ServerPage />
-      </Container>
-    );
+    // const { connectionStatus, currentPage } = this.props;
+    // console.log(this.props.connectionStatus);
+    // console.log(currentPage);
+
+    const Page = getCurrentPage();
+
+    return <Container>{Page}</Container>;
   }
 }
 
+//{connectionStatus === "connected" ? <Page /> : <Loading />}
 const mapStateToProps = state => ({
-  activeServer: state
+  connectedToServer: state.connectedToServer,
+  currentPage: state.currentPage,
+  socket: state.socket
 });
 
 export default connect(mapStateToProps)(Discord);

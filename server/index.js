@@ -5,21 +5,20 @@ const databaseInit = require("./database/databaseInit");
 
 //console.log(databaseReady);
 const port = 5000;
-//databaseInit();
+databaseInit();
 
 io.on("connection", function(socket) {
   console.log("a user connected");
+  console.log(socket);
 
-  socket.on("disconnect", function() {
-    console.log("user disconnected");
-  });
+  // socket.on("disconnect", function() {
+  //   console.log("user disconnected");
+  // });
 
-  socket.on("foo", () => {
-    console.log("bar");
-  });
-  socket.on("hello", () => {
-    console.log("recieved message, gffhtr.");
-    socket.emit("response msg", 123);
+  socket.emit("setup", "stuff");
+
+  socket.on("sendMessage", message => {
+    socket.broadcast.emit("recieveMessage", message);
   });
 });
 
