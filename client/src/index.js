@@ -5,14 +5,14 @@ import { Provider } from "react-redux";
 import "./index.css";
 import reducer from "./modules/reducers";
 import Discord from "./discord.jsx";
-//import initSocket from "./modules/socket/initSocket";
+import initSocket from "./modules/socket/initSocket";
 
 export const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-//initSocket();
+initSocket();
 
 // setInterval(() => {
 //   console.log(store.getState().socket);

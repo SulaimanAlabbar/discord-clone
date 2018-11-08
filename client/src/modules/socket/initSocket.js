@@ -1,7 +1,7 @@
 import establishConnection from "./establishConnection";
 import socketUpdate from "./socketUpdate";
 
-export default userInfo => {
-  establishConnection(userInfo);
+export default () => {
+  establishConnection();
   //socketUpdate();
 };

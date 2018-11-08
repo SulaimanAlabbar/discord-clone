@@ -131,12 +131,13 @@ const initialState = {
     }
   ],
   socket: false,
-  connectedToServer: true,
+  connectedToServer: false,
   //connectedToServer: false, change back to this
   loggedIn: false,
-  currentPage: "LoginPage",
+  currentPage: "Loading",
   activeServerIndex: 0,
-  activeChannelsIndices: [0, 1]
+  activeChannelsIndices: [0, 1],
+  inputtedLoginInfo: false
 };
 
 export default (state = initialState, action) => {

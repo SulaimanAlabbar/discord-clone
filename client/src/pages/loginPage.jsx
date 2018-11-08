@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import * as actionCreators from "../modules/actions";
-
+import { eventEmitter } from "../constants";
+const EventEmitter = require("eventemitter3");
 const Container = styled.section`
   display: grid;
   grid-template-columns: 88px 240px minmax(auto, 100%) 233px;
@@ -73,6 +74,14 @@ class LoginPage extends Component {
       userName: name,
       avatar: avatar
     });
+
+    eventEmitter.emit("inputtedUserInfo", {
+      userId: id,
+      userName: name,
+      avatar: avatar
+    });
+
+    this.props.setPage("Loading");
   }
 
   render() {
