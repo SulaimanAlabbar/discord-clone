@@ -2,26 +2,22 @@ import config from "../../config.json";
 import { store } from "../../index";
 import * as actionCreators from "../actions";
 import { eventEmitter } from "../../constants";
-const io = require("socket.io-client");
 const EventEmitter = require("eventemitter3");
+const socket = new WebSocket(`ws://localhost:5000`);
+// const io = new WebSocket(`ws://${config.serverIp}`);
 
 export default async () => {
   try {
     //connect with userinfo?
-    const socket = await io.connect(config.serverIp);
-
-    socket.on("connected", () => {
+    socket.onopen = () => {
+      console.log("connected to server");
       store.dispatch(actionCreators.setConnectionStatus(true));
       store.dispatch(actionCreators.setPage("LoginPage"));
-      //new eventEmitter every connection, change this.
-      //let evnt = new EventEmitter();
-
-      console.log("connected successfully");
 
       eventEmitter.on("inputtedUserInfo", userInfo => {
-        socket.emit("userInfo", userInfo);
+        socket.send(JSON.stringify(userInfo));
       });
-    });
+    };
 
     //socket.on("setup", data => {
     // store.dispatch(actionCreators.setSocket(socket));

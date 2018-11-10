@@ -10,9 +10,9 @@ import {
 } from "../actions/actions";
 
 const initialState = {
-  userId: "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d",
-  userName: "User112233",
-  avatar: "https://i.imgur.com/L8RLq3o.jpg",
+  //userId: "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d",
+  //userName: "User112233",
+  //avatar: "https://i.imgur.com/L8RLq3o.jpg",
   servers: [
     {
       name: "server1",
@@ -237,9 +237,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loggedIn: true,
-        userId: action.loginInfo.userId,
+        //userId: action.loginInfo.userId,
         userName: action.loginInfo.userName,
-        avatar: action.loginInfo.avatar,
+        // avatar: action.loginInfo.avatar,
         currentPage: "ServerPage"
       };
 

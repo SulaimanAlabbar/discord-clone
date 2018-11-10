@@ -47,38 +47,26 @@ class LoginPage extends Component {
   constructor() {
     super();
     this.state = {
-      id: "",
-      name: "",
-      avatar: ""
+      name: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    if (e.target.name === "id") {
-      this.setState({ id: e.target.value });
-    } else if (e.target.name === "name") {
-      this.setState({ name: e.target.value });
-    } else if (e.target.name === "avatar") {
-      this.setState({ avatar: e.target.value });
-    }
+    this.setState({ name: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { id, name, avatar } = this.state;
+    const { name } = this.state;
 
     this.props.login({
-      userId: id,
-      userName: name,
-      avatar: avatar
+      userName: name
     });
 
     eventEmitter.emit("inputtedUserInfo", {
-      userId: id,
-      userName: name,
-      avatar: avatar
+      userName: name
     });
 
     this.props.setPage("Loading");
@@ -90,26 +78,10 @@ class LoginPage extends Component {
         <form>
           <input
             type="text"
-            name="id"
-            className="input"
-            placeholder={`id`}
-            value={this.state.id}
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
             name="name"
             className="input"
             placeholder={`name`}
             value={this.state.name}
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            name="avatar"
-            className="input"
-            placeholder={`avatar`}
-            value={this.state.avatar}
             onChange={this.handleChange}
           />
           <input
