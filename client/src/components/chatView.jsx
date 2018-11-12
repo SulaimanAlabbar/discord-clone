@@ -7,7 +7,29 @@ const Container = styled.section`
 
   ul {
     list-style-type: none;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+      margin-right: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: #2f3136;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #202225;
+      border-radius: 10px;
+    }
   }
+
   li {
     border-bottom: 2px solid #3e4147;
     margin-right: 20px;
@@ -55,6 +77,9 @@ const Container = styled.section`
   }
 `;
 
+//scroll to bottom when user sends a message
+//and keep at bottom unless user scrolls
+
 export default class ChatView extends Component {
   render() {
     const { members, messages } = this.props;
@@ -63,7 +88,7 @@ export default class ChatView extends Component {
         <ul>
           {messages.map((message, index) => {
             const member = members.find(
-              member => member.id === message.authorId
+              member => member.id === message.memberId
             );
 
             return (
@@ -90,5 +115,3 @@ export default class ChatView extends Component {
     );
   }
 }
-
-// Borders with gap on top of messages

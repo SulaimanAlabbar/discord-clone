@@ -10,6 +10,7 @@
 body {
   background-color: #36393f;
   color: white;
+  overflow: hidden;
 
   font-family: Whitney;
   font-weight: 500;

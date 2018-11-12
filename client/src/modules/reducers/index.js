@@ -2,128 +2,17 @@ import {
   SET_ACTIVE_SERVER,
   SET_ACTIVE_CHANNEL,
   SET_INPUTPANEL_TEXT,
-  SEND_MESSAGE
+  ADD_MESSAGE,
+  SET_PAGE,
+  SET_SOCKET,
+  SET_USER_CONFIG
 } from "../actions/actions";
 
 const initialState = {
-  userId: 123,
-  username: "User112233",
-  avatar: "https://i.imgur.com/L8RLq3o.jpg",
-  servers: [
-    {
-      name: "server1",
-      id: 987,
-      icon: "https://i.imgur.com/3XzFlxU.png",
-      channels: [
-        {
-          name: "first-channel",
-          id: 2233,
-          topic: "Topic of first channel",
-          inputText: "",
-          messages: [
-            {
-              authorId: 777,
-              timestamp: "2018-11-03T14:06:27.818Z",
-              content: "Hello"
-            },
-            {
-              authorId: 888,
-              timestamp: "2018-11-03T14:24:15.883Z",
-              content: "Hey"
-            }
-          ]
-        },
-        {
-          name: "second-channel",
-          id: 3344,
-          topic: "Topic of second channel",
-          inputText: "",
-          messages: [
-            {
-              authorId: 888,
-              timestamp: "2018-11-03T14:24:15.883Z",
-              content: "abcdefg"
-            }
-          ]
-        },
-        {
-          name: "third-channel",
-          id: 4455,
-          topic: "Topic of third channel",
-          inputText: "",
-          messages: [
-            {
-              authorId: 777,
-              timestamp: "2018-11-03T14:06:27.818Z",
-              content: "123456789"
-            }
-          ]
-        }
-      ],
-      members: [
-        {
-          name: "User112233",
-          id: 123,
-          avatar: "https://i.imgur.com/L8RLq3o.jpg"
-        },
-        {
-          name: "User5566",
-          id: 777,
-          avatar: "https://i.imgur.com/l4wnhCz.png"
-        },
-        {
-          name: "User6677",
-          id: 888,
-          avatar: "https://i.imgur.com/iyXex3F.png"
-        }
-      ]
-    },
-    {
-      name: "server2",
-      id: 5672,
-      icon: "https://i.imgur.com/7kBg3tL.png",
-      channels: [
-        {
-          name: "first-channel",
-          id: 2233,
-          topic: "Topic of first channel",
-          inputText: "",
-          messages: []
-        },
-        {
-          name: "second-channel",
-          id: 3344,
-          topic: "Topic of second channel",
-          inputText: "",
-          messages: []
-        }
-      ],
-      members: [
-        {
-          name: "User112233",
-          id: 123,
-          avatar: "https://i.imgur.com/L8RLq3o.jpg"
-        },
-        {
-          name: "User6767",
-          id: 998,
-          avatar: "https://i.imgur.com/HnTWfFc.png"
-        },
-        {
-          name: "User7788",
-          id: 678,
-          avatar: "https://i.imgur.com/RgNEyri.png"
-        },
-        {
-          name: "User8899",
-          id: 7892,
-          avatar: "https://i.imgur.com/LZLjB5v.png"
-        }
-      ]
-    }
-  ],
-  activeServerIndex: 0,
-  activeChannelsIndices: [0, 1]
+  socket: false,
+  loggedIn: false,
+  currentPage: "Loading",
+  inputtedLoginInfo: false
 };
 
 export default (state = initialState, action) => {
@@ -168,40 +57,60 @@ export default (state = initialState, action) => {
           ...state.servers.slice(state.activeServerIndex + 1)
         ]
       };
-    case SEND_MESSAGE:
+    case ADD_MESSAGE:
       return {
         ...state,
         servers: [
-          ...state.servers.slice(0, state.activeServerIndex),
+          ...state.servers.slice(0, action.serverIndex),
           {
-            ...state.servers[state.activeServerIndex],
+            ...state.servers[action.serverIndex],
             channels: [
-              ...state.servers[state.activeServerIndex].channels.slice(
+              ...state.servers[action.serverIndex].channels.slice(
                 0,
-                state.activeChannelsIndices[state.activeServerIndex]
+                action.channelIndex
               ),
               {
-                ...state.servers[state.activeServerIndex].channels[
-                  state.activeChannelsIndices[state.activeServerIndex]
+                ...state.servers[action.serverIndex].channels[
+                  action.channelIndex
                 ],
                 messages: [
-                  ...state.servers[state.activeServerIndex].channels[
-                    state.activeChannelsIndices[state.activeServerIndex]
+                  ...state.servers[action.serverIndex].channels[
+                    action.channelIndex
                   ].messages,
                   {
-                    authorId: action.message.authorId,
+                    id: action.message.id,
                     timestamp: action.message.timestamp,
-                    content: action.message.content
+                    content: action.message.content,
+                    memberId: action.message.memberId
                   }
                 ]
               },
-              ...state.servers[state.activeServerIndex].channels.slice(
-                state.activeChannelsIndices[state.activeServerIndex] + 1
+              ...state.servers[action.serverIndex].channels.slice(
+                action.channelIndex + 1
               )
             ]
           },
-          ...state.servers.slice(state.activeServerIndex + 1)
+          ...state.servers.slice(action.serverIndex + 1)
         ]
+      };
+    case SET_PAGE:
+      return {
+        ...state,
+        currentPage: action.page
+      };
+    case SET_SOCKET:
+      return {
+        ...state,
+        socket: action.socket
+      };
+    case SET_USER_CONFIG:
+      return {
+        ...state,
+        ...action.userConfig,
+        currentPage: "ServerPage",
+        loggedIn: true,
+        activeServerIndex: action.activeServerIndex,
+        activeChannelsIndices: action.activeChannelsIndices
       };
 
     default:

@@ -1,29 +1,87 @@
-const server = require("http").createServer();
-const io = require("socket.io")(server);
+//const http = require("http");
+const WebSocket = require("ws");
+const uuid = require("uuid/v4");
 let { databaseReady } = require("./constants");
 const databaseInit = require("./database/databaseInit");
+const verifyUser = require("./database/verifyUser");
+const addMessage = require("./database/addMessage");
+const port = 5000;
+
+//const server = new http.createServer();
+
+const io = new WebSocket.Server({ port });
 
 //console.log(databaseReady);
-const port = 5000;
 //databaseInit();
 
-io.on("connection", function(socket) {
-  console.log("a user connected");
+let sockets = [];
+try {
+  io.on("connection", socket => {
+    console.log("User connected");
+    sockets.push({
+      socket: socket,
+      servers: []
+    });
 
-  socket.on("disconnect", function() {
-    console.log("user disconnected");
-  });
+    socket.on("close", () => {
+      console.log("USER DISCONNECTED");
+      const indexOfSock = sockets.findIndex(sock => sock.socket === socket);
+      sockets = [
+        ...sockets.slice(0, indexOfSock),
+        ...sockets.slice(indexOfSock + 1)
+      ];
+    });
 
-  socket.on("foo", () => {
-    console.log("bar");
-  });
-  socket.on("hello", () => {
-    console.log("recieved message, gffhtr.");
-    socket.emit("response msg", 123);
-  });
-});
+    socket.on("message", async msg => {
+      const messageAction = JSON.parse(msg).action;
+      const messagePayload = JSON.parse(msg).payload;
 
-server.listen(port, function(err) {
-  if (err) throw err;
-  console.log(`listening on port ${port}`);
-});
+      switch (messageAction) {
+        case "LOGIN":
+          const userVerified = await verifyUser(messagePayload);
+
+          if (!userVerified) {
+            socket.send(
+              JSON.stringify({
+                action: "LOGIN_FAIL",
+                payload: {}
+              })
+            );
+          } else {
+            const indexOfSock = sockets.findIndex(
+              sock => sock.socket === socket
+            );
+            sockets[indexOfSock] = {
+              ...sockets[indexOfSock],
+              servers: userVerified.servers.map(server => server.id)
+            };
+            socket.send(
+              JSON.stringify({
+                action: "LOGIN_SUCCESS",
+                payload: userVerified
+              })
+            );
+          }
+          break;
+
+        case "MESSAGE":
+          const message = await addMessage(messagePayload);
+          sockets.forEach(sock => {
+            if (sock.servers.includes(messagePayload.serverId)) {
+              sock.socket.send(
+                JSON.stringify({
+                  action: "MESSAGE",
+                  payload: message
+                })
+              );
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    });
+  });
+} catch (error) {
+  console.error(error);
+}
