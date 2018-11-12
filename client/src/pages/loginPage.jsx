@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import * as actionCreators from "../modules/actions";
-import { eventEmitter } from "../constants";
-const EventEmitter = require("eventemitter3");
+import Login from "../modules/socket/serverCom/login";
 const Container = styled.section`
   display: grid;
   grid-template-columns: 88px 240px minmax(auto, 100%) 233px;
@@ -59,17 +58,7 @@ class LoginPage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { name } = this.state;
-
-    this.props.login({
-      userName: name
-    });
-
-    eventEmitter.emit("inputtedUserInfo", {
-      userName: name
-    });
-
-    this.props.setPage("Loading");
+    Login(this.state.name);
   }
 
   render() {

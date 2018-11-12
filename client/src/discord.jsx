@@ -23,9 +23,7 @@ class Discord extends Component {
   }
 }
 
-//{connectionStatus === "connected" ? <Page /> : <Loading />}
 const mapStateToProps = state => ({
-  connectedToServer: state.connectedToServer,
   currentPage: state.currentPage,
   socket: state.socket
 });

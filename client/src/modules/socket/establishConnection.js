@@ -1,34 +1,67 @@
 import config from "../../config.json";
 import { store } from "../../index";
 import * as actionCreators from "../actions";
-import { eventEmitter } from "../../constants";
-const EventEmitter = require("eventemitter3");
 const socket = new WebSocket(`ws://localhost:5000`);
 // const io = new WebSocket(`ws://${config.serverIp}`);
 
 export default async () => {
   try {
-    //connect with userinfo?
     socket.onopen = () => {
       console.log("connected to server");
-      store.dispatch(actionCreators.setConnectionStatus(true));
+      store.dispatch(actionCreators.setSocket(socket));
       store.dispatch(actionCreators.setPage("LoginPage"));
 
-      eventEmitter.on("inputtedUserInfo", userInfo => {
-        socket.send(JSON.stringify(userInfo));
-      });
+      socket.onmessage = msg => {
+        const messageAction = JSON.parse(msg.data).action;
+        const messagePayload = JSON.parse(msg.data).payload;
+        console.log("RECV");
+
+        switch (messageAction) {
+          case "LOGIN_FAIL":
+            break;
+
+          case "LOGIN_SUCCESS":
+            store.dispatch(actionCreators.setUserConfig(messagePayload));
+            store.dispatch(actionCreators.setPage("ServerPage"));
+            break;
+
+          case "MESSAGE":
+            const { servers } = store.getState();
+            let serverIndex, channelIndex;
+
+            servers.forEach((server, srvIndex) =>
+              server.channels.forEach((channel, chIndex) => {
+                if (channel.id === messagePayload.channelId) {
+                  serverIndex = srvIndex;
+                  channelIndex = chIndex;
+                }
+              })
+            );
+
+            store.dispatch(
+              actionCreators.addMessage({
+                message: {
+                  id: messagePayload.id,
+                  timestamp: messagePayload.timestamp,
+                  content: messagePayload.content,
+                  memberId: messagePayload.memberId
+                },
+                serverIndex: serverIndex,
+                channelIndex: channelIndex
+              })
+            );
+
+            break;
+          default:
+            break;
+        }
+      };
+
+      // //put this somewhere else, maybe seperate file
+      // eventEmitter.on("inputtedUserInfo", userInfo => {
+      //   socket.send(JSON.stringify({ action: "LOGIN", payload: userInfo }));
+      // });
     };
-
-    //socket.on("setup", data => {
-    // store.dispatch(actionCreators.setSocket(socket));
-
-    // console.log(data);
-
-    //socket.on("recieveMessage", message => {
-    // console.log(message);
-    //  store.dispatch(actionCreators.sendMessage(message));
-    // });
-    //});
   } catch (error) {
     console.error(error);
   }

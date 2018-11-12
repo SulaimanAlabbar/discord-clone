@@ -14,19 +14,6 @@ export const store = createStore(
 
 initSocket();
 
-// setInterval(() => {
-//   console.log(store.getState().socket);
-// }, 2000);
-
-// setInterval(() => {
-//   if (store.getState().connectionStatus === "disconnected") {
-//     console.log("Attempting connection");
-//     socket();
-//   }
-// }, 10000);
-
-//change interval ^
-
 const App = () => (
   <Provider store={store}>
     <Discord />

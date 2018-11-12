@@ -88,7 +88,7 @@ class ServerPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.userName,
+  username: state.name,
   avatar: state.avatar,
   servers: state.servers,
   channels: state.servers[state.activeServerIndex].channels,

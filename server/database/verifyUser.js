@@ -2,6 +2,7 @@ const { Client } = require("pg");
 
 module.exports = async userInfo => {
   try {
+    const username = userInfo.name;
     const database = new Client({
       user: "discord",
       host: "localhost",
@@ -39,13 +40,13 @@ module.exports = async userInfo => {
   
     FROM servermembers 
     LEFT JOIN members on members.id = servermembers.memberid
-    WHERE members.name = '${userInfo.userName}'
+    WHERE members.name = '${username}'
   )
   
   ORDER BY servers.name, channels.name, members.name, messages.timestamp;`
     );
 
-    //if doesn't exist return here
+    if (response.rows.length === 0) return false;
 
     let data = {
       id: "",
@@ -53,7 +54,6 @@ module.exports = async userInfo => {
       avatar: "",
       servers: []
     };
-
     response.rows.forEach(row => {
       const indexOfServer = data.servers.findIndex(
         server => server.id === row.serverid
@@ -61,13 +61,9 @@ module.exports = async userInfo => {
       if (indexOfServer === -1) {
         data = {
           ...data,
-          id: userInfo.userName === row.membername ? row.memberid : data.id,
-          name:
-            userInfo.userName === row.membername ? row.membername : data.name,
-          avatar:
-            userInfo.userName === row.membername
-              ? row.memberavatar
-              : data.avatar,
+          id: username === row.membername ? row.memberid : data.id,
+          name: username === row.membername ? row.membername : data.name,
+          avatar: username === row.membername ? row.memberavatar : data.avatar,
           servers: [
             ...data.servers,
             {
@@ -113,135 +109,200 @@ module.exports = async userInfo => {
           channel => channel.id === row.channelid
         );
 
-        console.log(data.servers[0]);
-        console.log(indexOfServer);
-        console.log(indexOfMember);
-        console.log(indexOfChannel);
-
         if (indexOfChannel === -1) {
-          console.log("++++++SERVER++++++");
           data = {
             ...data,
-            id: userInfo.userName === row.membername ? row.memberid : data.id,
-            name:
-              userInfo.userName === row.membername ? row.membername : data.name,
+            id: username === row.membername ? row.memberid : data.id,
+            name: username === row.membername ? row.membername : data.name,
             avatar:
-              userInfo.userName === row.membername
-                ? row.memberavatar
-                : data.avatar,
+              username === row.membername ? row.memberavatar : data.avatar,
             servers: [
               ...data.servers.slice(0, indexOfServer),
               {
                 ...data.servers[indexOfServer],
-                channels: [
-                  ...data.servers[indexOfServer].channels,
-                  row.channelid !== null && {
-                    id: row.channelid,
-                    name: row.channelname,
-                    topic: row.channeltopic,
-                    inputText: "",
-                    messages:
-                      row.messageid === null
-                        ? []
-                        : [
-                            {
-                              id: row.messageid,
-                              timestamp: row.messagetimestamp,
-                              content: row.messagecontent,
-                              memberId: row.memberid
-                            }
-                          ]
-                  }
-                ],
-                members: [
-                  ...data.members[indexOfServer].members,
-                  indexOfMember === -1 && {
-                    id: row.memberid,
-                    name: row.membername,
-                    avatar: row.memberavatar
-                  }
-                ]
+                channels:
+                  row.channelid === null
+                    ? []
+                    : [
+                        ...data.servers[indexOfServer].channels,
+                        {
+                          id: row.channelid,
+                          name: row.channelname,
+                          topic: row.channeltopic,
+                          inputText: "",
+                          messages:
+                            row.messageid === null
+                              ? []
+                              : [
+                                  {
+                                    id: row.messageid,
+                                    timestamp: row.messagetimestamp,
+                                    content: row.messagecontent,
+                                    memberId: row.memberid
+                                  }
+                                ]
+                        }
+                      ],
+                members:
+                  indexOfMember === -1
+                    ? [
+                        ...data.servers[indexOfServer].members,
+                        {
+                          id: row.memberid,
+                          name: row.membername,
+                          avatar: row.memberavatar
+                        }
+                      ]
+                    : [
+                        {
+                          id: row.memberid,
+                          name: row.membername,
+                          avatar: row.memberavatar
+                        }
+                      ]
               },
               ...data.servers.slice(indexOfServer + 1)
             ]
           };
-          console.log("++++++SERVER++++++");
         } else {
           const indexOfMessage = data.servers[indexOfServer].channels[
             indexOfChannel
           ].messages.findIndex(message => message.id === row.messageid);
-          data = {
-            ...data,
-            id: userInfo.userName === row.membername ? row.memberid : data.id,
-            name:
-              userInfo.userName === row.membername ? row.membername : data.name,
-            avatar:
-              userInfo.userName === row.membername
-                ? row.memberavatar
-                : data.avatar,
-            servers: [
-              ...data.servers.slice(0, indexOfServer),
-              {
-                ...data.servers[indexOfServer],
-                channels: [
-                  ...data.servers[indexOfServer].channels.slice(
-                    0,
-                    indexOfChannel
-                  ),
-                  {
-                    id: row.channelid,
-                    name: row.channelname,
-                    topic: row.channeltopic,
-                    inputText: "",
-                    messages:
-                      indexOfMessage === -1
-                        ? [
-                            {
-                              id: row.messageid,
-                              timestamp: row.messagetimestamp,
-                              content: row.messagecontent,
-                              memberId: row.memberid
-                            }
-                          ]
-                        : [
-                            ...data.servers[indexOfServer].channels[
-                              indexOfChannels
-                            ].messages.slice(0, indexOfMessage),
-                            {
-                              id: row.messageid,
-                              timestamp: row.messagetimestamp,
-                              content: row.messagecontent,
-                              memberId: row.memberid
-                            },
-                            ...data.servers[indexOfServer].channels[
-                              indexOfChannels
-                            ].messages.slice(indexOfMessage + 1)
-                          ]
-                  },
-                  ...data.servers[indexOfServer].channels.slice(
-                    indexOfChannel + 1
-                  )
-                ],
-                members: [
-                  ...data.members[indexOfServer].members,
-                  indexOfMember === -1 && {
-                    id: row.memberid,
-                    name: row.membername,
-                    avatar: row.memberavatar
-                  }
-                ]
-              },
-              ...data.servers.slice(indexOfServer + 1)
-            ]
-          };
+
+          if (indexOfMessage === -1) {
+            data = {
+              ...data,
+              id: username === row.membername ? row.memberid : data.id,
+              name: username === row.membername ? row.membername : data.name,
+              avatar:
+                username === row.membername ? row.memberavatar : data.avatar,
+              servers: [
+                ...data.servers.slice(0, indexOfServer),
+                {
+                  ...data.servers[indexOfServer],
+                  channels: [
+                    ...data.servers[indexOfServer].channels.slice(
+                      0,
+                      indexOfChannel
+                    ),
+                    {
+                      id: row.channelid,
+                      name: row.channelname,
+                      topic: row.channeltopic,
+                      inputText: "",
+                      messages:
+                        row.messageid === null
+                          ? [
+                              ...data.servers[indexOfServer].channels[
+                                indexOfChannel
+                              ].messages
+                            ]
+                          : [
+                              ...data.servers[indexOfServer].channels[
+                                indexOfChannel
+                              ].messages,
+                              {
+                                id: row.messageid,
+                                timestamp: row.messagetimestamp,
+                                content: row.messagecontent,
+                                memberId: row.memberid
+                              }
+                            ]
+                    },
+                    ...data.servers[indexOfServer].channels.slice(
+                      indexOfChannel + 1
+                    )
+                  ],
+                  members:
+                    indexOfMember === -1
+                      ? [
+                          ...data.servers[indexOfServer].members,
+                          {
+                            id: row.memberid,
+                            name: row.membername,
+                            avatar: row.memberavatar
+                          }
+                        ]
+                      : [
+                          ...data.servers[indexOfServer].members,
+                          {
+                            id: row.memberid,
+                            name: row.membername,
+                            avatar: row.memberavatar
+                          }
+                        ]
+                },
+                ...data.servers.slice(indexOfServer + 1)
+              ]
+            };
+          } else {
+            data = {
+              ...data,
+              id: username === row.membername ? row.memberid : data.id,
+              name: username === row.membername ? row.membername : data.name,
+              avatar:
+                username === row.membername ? row.memberavatar : data.avatar,
+              servers: [
+                ...data.servers.slice(0, indexOfServer),
+                {
+                  ...data.servers[indexOfServer],
+                  channels: [
+                    ...data.servers[indexOfServer].channels.slice(
+                      0,
+                      indexOfChannel
+                    ),
+                    {
+                      id: row.channelid,
+                      name: row.channelname,
+                      topic: row.channeltopic,
+                      inputText: "",
+                      messages: [
+                        ...data.servers[indexOfServer].channels[
+                          indexOfChannel
+                        ].messages.slice(0, indexOfMessage),
+                        {
+                          id: row.messageid,
+                          timestamp: row.messagetimestamp,
+                          content: row.messagecontent,
+                          memberId: row.memberid
+                        },
+                        ...data.servers[indexOfServer].channels[
+                          indexOfChannel
+                        ].messages.slice(indexOfMessage + 1)
+                      ]
+                    },
+                    ...data.servers[indexOfServer].channels.slice(
+                      indexOfChannel + 1
+                    )
+                  ],
+                  members:
+                    indexOfMember === -1
+                      ? [
+                          ...data.servers[indexOfServer].members,
+                          {
+                            id: row.memberid,
+                            name: row.membername,
+                            avatar: row.memberavatar
+                          }
+                        ]
+                      : [
+                          ...data.servers[indexOfServer].members,
+                          {
+                            id: row.memberid,
+                            name: row.membername,
+                            avatar: row.memberavatar
+                          }
+                        ]
+                },
+                ...data.servers.slice(indexOfServer + 1)
+              ]
+            };
+          }
         }
       }
     });
     await database.end();
-
-    console.log(data);
-    console.log("!!!!END!!!!");
-    return "WHAT";
+    return data;
   } catch (error) {
     console.error(error);
   }

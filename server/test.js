@@ -1,11 +1,9 @@
-let data = {
-  servers: [
-    {
-      id: 123,
-      channels: []
-    }
-  ]
+let indexOfMember = 0;
+
+let members = indexOfMember === -1 && {
+  id: "123",
+  name: "123",
+  avatar: "123"
 };
 
-console.log("323");
-console.log(data.servers[0].channels.slice(0, -1));
+console.log(members);
