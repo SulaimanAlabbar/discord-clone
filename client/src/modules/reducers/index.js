@@ -5,7 +5,9 @@ import {
   ADD_MESSAGE,
   SET_PAGE,
   SET_SOCKET,
-  SET_USER_CONFIG
+  SET_USER_CONFIG,
+  SET_SERVERMODAL_VISIBILITY,
+  SET_SERVERMODAL_VIEW
 } from "../actions/actions";
 
 const initialState = {
@@ -110,9 +112,20 @@ export default (state = initialState, action) => {
         currentPage: "ServerPage",
         loggedIn: true,
         activeServerIndex: action.activeServerIndex,
-        activeChannelsIndices: action.activeChannelsIndices
+        activeChannelsIndices: action.activeChannelsIndices,
+        serverModalVisible: action.visibility,
+        serverModalView: action.view
       };
-
+    case SET_SERVERMODAL_VISIBILITY:
+      return {
+        ...state,
+        serverModalVisible: action.visibility
+      };
+    case SET_SERVERMODAL_VIEW:
+      return {
+        ...state,
+        serverModalView: action.view
+      };
     default:
       return state;
   }

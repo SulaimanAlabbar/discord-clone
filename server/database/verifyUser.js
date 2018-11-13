@@ -130,6 +130,8 @@ module.exports = async userInfo => {
                           name: row.channelname,
                           topic: row.channeltopic,
                           inputText: "",
+                          userScroll: false,
+                          unreadMessages: false,
                           messages:
                             row.messageid === null
                               ? []
@@ -190,6 +192,8 @@ module.exports = async userInfo => {
                       name: row.channelname,
                       topic: row.channeltopic,
                       inputText: "",
+                      userScroll: false,
+                      unreadMessages: false,
                       messages:
                         row.messageid === null
                           ? [
@@ -256,6 +260,8 @@ module.exports = async userInfo => {
                       name: row.channelname,
                       topic: row.channeltopic,
                       inputText: "",
+                      userScroll: false,
+                      unreadMessages: false,
                       messages: [
                         ...data.servers[indexOfServer].channels[
                           indexOfChannel

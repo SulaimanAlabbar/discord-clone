@@ -4,6 +4,9 @@ import styled from "styled-components";
 const Container = styled.section`
   background-color: #36393f;
   color: #d6d7cf;
+  padding-right: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
   ul {
     list-style-type: none;
@@ -31,7 +34,8 @@ const Container = styled.section`
   }
 
   li {
-    border-bottom: 2px solid #3e4147;
+    /* border-bottom: 2px solid #3e4147; */
+    border-top: 2px solid #3e4147;
     margin-right: 20px;
     margin-left: 20px;
     padding: 20px 20px 20px 20px;
@@ -80,7 +84,47 @@ const Container = styled.section`
 //scroll to bottom when user sends a message
 //and keep at bottom unless user scrolls
 
+// var scrolling = false;
+
+// $( window ).scroll( function() {
+//   scrolling = true;
+// });
+
+// setInterval( function() {
+//   if ( scrolling ) {
+//     scrolling = false;
+//     // Do your thang!
+//   }
+// }, 250 );
+
 export default class ChatView extends Component {
+  constructor() {
+    super();
+
+    // this.didWheel = false;
+
+    this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.handleWheel = this.handleWheel.bind(this);
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+    // window.addEventListener("scroll", this.handleScroll);
+  }
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.handleScroll);
+  // }
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+  scrollToBottom() {
+    this.el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  handleWheel() {
+    this.didWheel = true;
+  }
+
   render() {
     const { members, messages } = this.props;
     return (
@@ -110,6 +154,11 @@ export default class ChatView extends Component {
               </li>
             );
           })}
+          <div
+            ref={el => {
+              this.el = el;
+            }}
+          />
         </ul>
       </Container>
     );

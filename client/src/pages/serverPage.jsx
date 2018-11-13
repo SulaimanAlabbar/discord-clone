@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actionCreators from "../modules/actions";
 import ServersBar from "../components/serversBar";
 import ServerHeader from "../components/serverHeader";
 import ChannelsBar from "../components/channelsBar";
@@ -8,6 +9,9 @@ import ChannelHeader from "../components/channelHeader";
 import ChatView from "../components/chatView";
 import MemberList from "../components/memberList";
 import InputPanel from "../components/inputPanel";
+// import PrePosedServerCJModal from "../components/serverCJModal";
+import ServerCJModal from "../components/serverCJModal";
+import posed, { PoseGroup } from "react-pose";
 import styled from "styled-components";
 
 const Container = styled.section`
@@ -47,9 +51,48 @@ const Container = styled.section`
   .ml {
     grid-area: MemberList;
   }
+
+  .shade {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 `;
 
+// const Shade = posed.div({
+//   enter: { opacity: 1 },
+//   exit: { opacity: 0 }
+// });
+
+// const ServerCJModal = posed(PrePosedServerCJModal)({
+//   enter: {
+//     opacity: 1,
+//     delay: 50,
+//     transition: {
+//       default: { duration: 50 }
+//     }
+//   },
+//   exit: {
+//     opacity: 0,
+//     delay: 50,
+//     transition: { duration: 50 }
+//   }
+// });
+
 class ServerPage extends Component {
+  constructor() {
+    super();
+
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  closeModal(view) {
+    this.props.setServerModalView(view);
+    this.props.setServerModalVisibility(false);
+  }
   render() {
     const {
       username,
@@ -62,8 +105,11 @@ class ServerPage extends Component {
       activeChannelIndex,
       activeChannelName,
       activeChannelTopic,
-      messages
+      messages,
+      serverModalVisible,
+      serverModalView
     } = this.props;
+
     return (
       <Container {...this.props}>
         <ServersBar
@@ -82,6 +128,14 @@ class ServerPage extends Component {
         <ChatView className="cv" members={members} messages={messages} />
         <InputPanel className="ip" activeChannelName={activeChannelName} />
         <MemberList className="ml" members={members} />
+        {serverModalVisible && [
+          <div
+            key="shade"
+            className="shade"
+            onClick={() => this.closeModal("")}
+          />,
+          <ServerCJModal key="modal" serverModalView={serverModalView} />
+        ]}
       </Container>
     );
   }
@@ -107,11 +161,14 @@ const mapStateToProps = state => ({
   messages:
     state.servers[state.activeServerIndex].channels[
       state.activeChannelsIndices[state.activeServerIndex]
-    ].messages
+    ].messages,
+  serverModalVisible: state.serverModalVisible,
+  serverModalView: state.serverModalView
 });
 
-// const mapDispatchToProps = {
+const mapDispatchToProps = actionCreators;
 
-// }
-
-export default connect(mapStateToProps)(ServerPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ServerPage);

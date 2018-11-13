@@ -14,7 +14,6 @@ export default async () => {
       socket.onmessage = msg => {
         const messageAction = JSON.parse(msg.data).action;
         const messagePayload = JSON.parse(msg.data).payload;
-        console.log("RECV");
 
         switch (messageAction) {
           case "LOGIN_FAIL":

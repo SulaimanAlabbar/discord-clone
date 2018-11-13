@@ -16,6 +16,7 @@ const Container = styled.nav`
     font-size: 1.2em;
     font-weight: 500;
     cursor: pointer;
+    /* color: #72767d; */
   }
   .unactiveChannel:hover {
     background-color: #36393f;
@@ -26,6 +27,10 @@ const Container = styled.nav`
     color: #f6f6f2;
     cursor: default;
   }
+`;
+
+const Li = styled.li`
+  color: ${props => (props.unreadMessages ? "white" : "#72767d")};
 `;
 
 class ChannelsBar extends Component {
@@ -51,13 +56,14 @@ class ChannelsBar extends Component {
                   #{channel.name}
                 </li>
               ) : (
-                <li
+                <Li
                   key={index}
                   className="unactiveChannel"
                   onClick={() => this.clickHandler(index)}
+                  unreadMessages={channel.unreadMessages}
                 >
                   #{channel.name}
-                </li>
+                </Li>
               )
           )}
         </ul>

@@ -31,6 +31,7 @@ const Container = styled.section`
 class InputPanel extends Component {
   constructor() {
     super();
+    this.inputPanel = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -49,6 +50,14 @@ class InputPanel extends Component {
     } else this.props.setInputPanelText(e.target.value);
   }
 
+  componentDidMount = () => {
+    this.inputPanel.current.focus();
+  };
+
+  componentDidUpdate = () => {
+    this.inputPanel.current.focus();
+  };
+
   render() {
     const { activeChannelName, inputText } = this.props;
     return (
@@ -60,6 +69,7 @@ class InputPanel extends Component {
           value={inputText}
           onChange={e => this.handleInputChange(e)}
           onKeyPress={e => this.handleInputChange(e)}
+          ref={this.inputPanel}
         />
       </Container>
     );
