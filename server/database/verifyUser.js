@@ -78,6 +78,9 @@ module.exports = async userInfo => {
                         id: row.channelid,
                         name: row.channelname,
                         topic: row.channeltopic,
+                        inputText: "",
+                        userScroll: false,
+                        unreadMessages: false,
                         messages:
                           row.messageid === null
                             ? []

@@ -69,7 +69,7 @@ class LoginPage extends Component {
             type="text"
             name="name"
             className="input"
-            placeholder={`name`}
+            placeholder="name"
             value={this.state.name}
             onChange={this.handleChange}
           />

@@ -7,7 +7,10 @@ import {
   SET_SOCKET,
   SET_USER_CONFIG,
   SET_SERVERMODAL_VISIBILITY,
-  SET_SERVERMODAL_VIEW
+  SET_SERVERMODAL_VIEW,
+  SET_INVITEMODAL_VISIBILITY,
+  SET_READY_CREATE_SERVER,
+  ADD_SERVER
 } from "./actions";
 
 export const setActiveServer = index => ({
@@ -48,7 +51,8 @@ export const setUserConfig = userConfig => ({
   activeServerIndex: 0,
   activeChannelsIndices: new Array(userConfig.servers.length).fill(0),
   serverModalVisible: false,
-  serverModalView: ""
+  serverModalView: "",
+  inviteModalVisible: false
 });
 
 export const setServerModalVisibility = visibility => ({
@@ -59,4 +63,18 @@ export const setServerModalVisibility = visibility => ({
 export const setServerModalView = view => ({
   type: SET_SERVERMODAL_VIEW,
   view
+});
+
+export const setInviteModalVisibility = visibility => ({
+  type: SET_INVITEMODAL_VISIBILITY,
+  visibility
+});
+
+export const setReadyCreateServer = ready => ({
+  type: SET_READY_CREATE_SERVER,
+  ready
+});
+export const addServer = newServer => ({
+  type: ADD_SERVER,
+  newServer
 });

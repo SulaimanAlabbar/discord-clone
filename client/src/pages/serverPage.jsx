@@ -11,7 +11,8 @@ import MemberList from "../components/memberList";
 import InputPanel from "../components/inputPanel";
 // import PrePosedServerCJModal from "../components/serverCJModal";
 import ServerCJModal from "../components/serverCJModal";
-import posed, { PoseGroup } from "react-pose";
+import InviteModal from "../components/inviteModal";
+//import posed, { PoseGroup } from "react-pose";
 import styled from "styled-components";
 
 const Container = styled.section`
@@ -95,6 +96,7 @@ class ServerPage extends Component {
   }
   render() {
     const {
+      id,
       username,
       avatar,
       servers,
@@ -107,7 +109,9 @@ class ServerPage extends Component {
       activeChannelTopic,
       messages,
       serverModalVisible,
-      serverModalView
+      serverModalView,
+      inviteModalVisible,
+      inviteLink
     } = this.props;
 
     return (
@@ -134,14 +138,20 @@ class ServerPage extends Component {
             className="shade"
             onClick={() => this.closeModal("")}
           />,
-          <ServerCJModal key="modal" serverModalView={serverModalView} />
+          <ServerCJModal
+            key="modal"
+            serverModalView={serverModalView}
+            id={id}
+          />
         ]}
+        {inviteModalVisible && <InviteModal inviteLink={inviteLink} />}
       </Container>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  id: state.id,
   username: state.name,
   avatar: state.avatar,
   servers: state.servers,
@@ -163,7 +173,9 @@ const mapStateToProps = state => ({
       state.activeChannelsIndices[state.activeServerIndex]
     ].messages,
   serverModalVisible: state.serverModalVisible,
-  serverModalView: state.serverModalView
+  serverModalView: state.serverModalView,
+  inviteModalVisible: state.inviteModalVisible,
+  inviteLink: state.servers[state.activeServerIndex].id
 });
 
 const mapDispatchToProps = actionCreators;

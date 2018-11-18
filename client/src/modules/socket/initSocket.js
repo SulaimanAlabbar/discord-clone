@@ -1,5 +1,5 @@
 import establishConnection from "./establishConnection";
-import socketUpdate from "./socketUpdate";
+//import socketUpdate from "./socketUpdate";
 
 export default () => {
   establishConnection();

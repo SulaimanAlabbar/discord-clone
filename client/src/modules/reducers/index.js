@@ -7,7 +7,10 @@ import {
   SET_SOCKET,
   SET_USER_CONFIG,
   SET_SERVERMODAL_VISIBILITY,
-  SET_SERVERMODAL_VIEW
+  SET_SERVERMODAL_VIEW,
+  SET_INVITEMODAL_VISIBILITY,
+  SET_READY_CREATE_SERVER,
+  ADD_SERVER
 } from "../actions/actions";
 
 const initialState = {
@@ -22,7 +25,8 @@ export default (state = initialState, action) => {
     case SET_ACTIVE_SERVER:
       return {
         ...state,
-        activeServerIndex: action.index
+        activeServerIndex: action.index,
+        inviteModalVisible: false
       };
     case SET_ACTIVE_CHANNEL:
       return {
@@ -119,12 +123,30 @@ export default (state = initialState, action) => {
     case SET_SERVERMODAL_VISIBILITY:
       return {
         ...state,
-        serverModalVisible: action.visibility
+        serverModalVisible: action.visibility,
+        inviteModalVisible: false
       };
     case SET_SERVERMODAL_VIEW:
       return {
         ...state,
         serverModalView: action.view
+      };
+    case SET_INVITEMODAL_VISIBILITY:
+      return {
+        ...state,
+        inviteModalVisible: action.visibility,
+        serverModalVisible: false
+      };
+    case SET_READY_CREATE_SERVER:
+      return {
+        ...state,
+        readyCreateServer: action.ready
+      };
+    case ADD_SERVER:
+      return {
+        ...state,
+        servers: [...state.servers, action.newServer],
+        activeChannelsIndices: [...state.activeChannelsIndices, 0]
       };
     default:
       return state;

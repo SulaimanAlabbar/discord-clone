@@ -3,7 +3,6 @@ import { store } from "../index";
 import Loading from "../pages/loading";
 import ServerPage from "../pages/serverPage";
 import LoginPage from "../pages/loginPage";
-import initSocket from "../modules/socket/initSocket";
 export default () => {
   const { currentPage } = store.getState();
 
