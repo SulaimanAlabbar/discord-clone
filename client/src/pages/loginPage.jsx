@@ -1,46 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import * as actionCreators from "../modules/actions";
 import Login from "../modules/socket/serverCom/login";
-const Container = styled.section`
-  display: grid;
-  grid-template-columns: 88px 240px minmax(auto, 100%) 233px;
-  grid-template-rows: 48px minmax(auto, 835px) 40px 52px;
-  grid-template-areas:
-    "ServersBar ServerHeader ChannelHeader ChannelHeader"
-    "ServersBar ChannelsBar ChatView MemberList"
-    "ServersBar ChannelsBar InputPanel MemberList"
-    "ServersBar UserPanel InputPanel MemberList";
-
-  .sb {
-    grid-area: ServersBar;
-  }
-  .sh {
-    grid-area: ServerHeader;
-  }
-  .cb {
-    grid-area: ChannelsBar;
-  }
-
-  .usp {
-    grid-area: UserPanel;
-  }
-  .ch {
-    grid-area: ChannelHeader;
-  }
-  .cv {
-    grid-area: ChatView;
-    word-break: break-word;
-    overflow: hidden;
-  }
-  .ip {
-    grid-area: InputPanel;
-  }
-  .ml {
-    grid-area: MemberList;
-  }
-`;
 
 class LoginPage extends Component {
   constructor() {
@@ -63,7 +24,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <Container {...this.props}>
+      <div className="loginPage--container">
         <form>
           <input
             type="text"
@@ -73,13 +34,11 @@ class LoginPage extends Component {
             value={this.state.name}
             onChange={this.handleChange}
           />
-          <input
-            type="submit"
-            value="submit"
-            onClick={e => this.handleSubmit(e)}
-          />
+          <button type="submit" onClick={e => this.handleSubmit(e)}>
+            submit
+          </button>
         </form>
-      </Container>
+      </div>
     );
   }
 }

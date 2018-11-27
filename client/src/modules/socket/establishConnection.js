@@ -24,7 +24,7 @@ export default async () => {
             store.dispatch(actionCreators.setPage("ServerPage"));
             break;
 
-          case "MESSAGE":
+          case "MESSAGE": {
             const { servers } = store.getState();
             let serverIndex, channelIndex;
 
@@ -51,6 +51,7 @@ export default async () => {
             );
 
             break;
+          }
           case "SCJModal":
             store.dispatch(actionCreators.setReadyCreateServer(false));
             store.dispatch(actionCreators.setServerModalView("createjoin"));

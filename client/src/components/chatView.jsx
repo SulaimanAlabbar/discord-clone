@@ -1,85 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-
-const Container = styled.section`
-  background-color: #36393f;
-  color: #d6d7cf;
-  padding-right: 3px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-
-  ul {
-    list-style-type: none;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-
-    /* width */
-    ::-webkit-scrollbar {
-      width: 10px;
-      margin-right: 5px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-      border-radius: 10px;
-      background-color: #2f3136;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #202225;
-      border-radius: 10px;
-    }
-  }
-
-  li {
-    /* border-bottom: 2px solid #3e4147; */
-    border-top: 2px solid #3e4147;
-    margin-right: 20px;
-    margin-left: 20px;
-    padding: 20px 20px 20px 20px;
-    font-size: 1.2em;
-    font-weight: 500;
-    display: flex;
-  }
-  img {
-    height: 40px;
-    width: 40px;
-    border-radius: 25px;
-    margin-right: 20px;
-    user-select: none;
-    cursor: pointer;
-    transition: opacity 0.2s linear;
-  }
-  img:hover {
-    opacity: 0.8;
-  }
-  .name {
-    cursor: pointer;
-    color: white;
-  }
-  .date {
-    font-size: 0.7em;
-    color: #585a5f;
-    font-weight: bold;
-    padding-left: 10px;
-  }
-  .flex {
-    display: flex;
-    flex-direction: column;
-  }
-  .top {
-    order: 1;
-    display: flex;
-    vertical-align: middle;
-  }
-  .message {
-    order: 2;
-    padding-top: 5px;
-    font-size: 0.9em;
-  }
-`;
+import { connect } from "react-redux";
 
 //scroll to bottom when user sends a message
 //and keep at bottom unless user scrolls
@@ -97,47 +17,65 @@ const Container = styled.section`
 //   }
 // }, 250 );
 
-export default class ChatView extends Component {
+class ChatView extends Component {
   constructor() {
     super();
 
-    // this.didWheel = false;
-
-    this.scrollToBottom = this.scrollToBottom.bind(this);
-    this.handleWheel = this.handleWheel.bind(this);
+    this.scrollRef = React.createRef();
   }
 
   componentDidMount() {
-    this.scrollToBottom();
-    // window.addEventListener("scroll", this.handleScroll);
-  }
-  // componentWillUnmount() {
-  //   window.removeEventListener("scroll", this.handleScroll);
-  // }
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
-  scrollToBottom() {
-    this.el.scrollIntoView({ behavior: "smooth" });
+    this.scrollRef.current.scrollTo({
+      top: this.scrollRef.current.scrollHeight,
+      behavior: "auto"
+    });
   }
 
-  handleWheel() {
-    this.didWheel = true;
-  }
+  componentDidUpdate = () => {
+    const scrollRef = this.scrollRef.current;
+    const { id, messages, smoothScroll } = this.props;
+    if (!smoothScroll) {
+      scrollRef.scrollTo({ top: scrollRef.scrollHeight, behavior: "auto" });
+    } else if (
+      scrollRef.scrollHeight - scrollRef.offsetHeight - scrollRef.scrollTop <=
+        500 ||
+      messages[messages.length - 1].memberId === id
+    ) {
+      scrollRef.scrollTo({ top: scrollRef.scrollHeight, behavior: "smooth" });
+    }
+
+    // //this.scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    // // console.log(this.scrollRef.current.scrollTop); //
+    // // console.log(this.scrollRef.current.scrollHeight); //offsetHeight 840
+    // // console.log(this.scrollRef.current.offsetHeight);
+    // // this.scrollRef.current.
+
+    // if (
+    //   scrollRef.scrollHeight - scrollRef.offsetHeight - scrollRef.scrollTop <=
+    //   500
+    // )
+    //   scrollRef.scrollTo({ top: scrollRef.scrollHeight, behavior: "smooth" });
+
+    console.log("UPDATE");
+  };
 
   render() {
     const { members, messages } = this.props;
     return (
-      <Container {...this.props}>
-        <ul>
+      <div className="chatView--container">
+        <ul className="chatView--ul" ref={this.scrollRef}>
           {messages.map((message, index) => {
             const member = members.find(
               member => member.id === message.memberId
             );
 
             return (
-              <li key={index}>
-                <img src={member.avatar} alt="avatar" />
+              <li className="chatView--li" key={index}>
+                <img
+                  className="chatView--img"
+                  src={member.avatar}
+                  alt="avatar"
+                />
                 <div className="flex">
                   <div className="top">
                     <h5 className="name">{member.name}</h5>
@@ -154,13 +92,25 @@ export default class ChatView extends Component {
               </li>
             );
           })}
-          <div
-            ref={el => {
-              this.el = el;
-            }}
-          />
+          <li />
         </ul>
-      </Container>
+      </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  activeServerIndex: state.activeChannelsIndices,
+  activeChannelsIndices: state.activeChannelsIndices,
+  id: state.id,
+  messages:
+    state.servers[state.activeServerIndex].channels[
+      state.activeChannelsIndices[state.activeServerIndex]
+    ].messages,
+  smoothScroll: state.smoothScroll
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(ChatView);

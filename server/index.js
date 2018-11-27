@@ -75,6 +75,7 @@ try {
         }
 
         case "MESSAGE": {
+          console.log(messagePayload);
           const message = await addMessage(messagePayload);
           state.sockets.forEach(sock => {
             if (sock.servers.includes(messagePayload.serverId)) {

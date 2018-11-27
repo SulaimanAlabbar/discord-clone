@@ -1,25 +1,6 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
 import * as actionCreators from "../modules/actions";
-
-const Container = styled.nav`
-  background-color: #2f3136;
-  border-bottom: 2px #232428 solid;
-  font-size: 1.4em;
-  font-weight: 500;
-  padding-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  user-select: none;
-
-  button {
-    margin-left: 50px;
-    float: right;
-    width: 50px;
-  }
-`;
 
 class ServerHeader extends Component {
   constructor() {
@@ -35,10 +16,15 @@ class ServerHeader extends Component {
   render() {
     const { activeServerName } = this.props;
     return (
-      <Container {...this.props}>
+      <div className="serverHeader--container">
         <h5>{activeServerName}</h5>
-        <button onClick={() => this.clickHandler()}>+</button>
-      </Container>
+        <button
+          className="serverHeader--button"
+          onClick={() => this.clickHandler()}
+        >
+          +
+        </button>
+      </div>
     );
   }
 }

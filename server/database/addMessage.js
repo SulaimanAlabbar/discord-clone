@@ -13,14 +13,14 @@ module.exports = async messageInfo => {
     });
 
     await database.connect();
-    //     const response = await database.query(
-    // `insert into messages values
-    // ('${id}',
-    // '${timestamp}',
-    // '${content}',
-    // '${memberId}',
-    // '${channelId}');`
-    //      );
+    const response = await database.query(
+      `INSERT INTO messages VALUES
+    ('${id}',
+    '${timestamp}',
+    '${content}',
+    '${memberId}',
+    '${channelId}');`
+    );
     await database.end();
     return messageInfo;
   } catch (error) {
