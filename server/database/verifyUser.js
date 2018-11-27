@@ -1,4 +1,5 @@
 const { Client } = require("pg");
+const fs = require("fs");
 
 module.exports = async userInfo => {
   try {
@@ -12,38 +13,36 @@ module.exports = async userInfo => {
     });
     await database.connect();
     const response = await database.query(
-      `SELECT
-      servers.id as serverId,
-      servers.name as serverName,
-      servers.icon as serverIcon,
-      channels.id as channelId,
-      channels.name as channelName,
-      channels.topic as channelTopic,
-      members.id as memberId,
-      members.name as memberName, 
-      members.avatar as memberAvatar,
-      messages.id as messageId,
-      messages.timestamp as messageTimestamp,
-      messages.content as messageContent
+      `SELECT  
+      srv.id as serverId,
+      srv.name as serverName,
+      srv.icon as serverIcon,
+      ch.id as channelId,
+      ch.name as channelName,
+      ch.topic as channelTopic,
+      mem1.id as memberId,
+      mem1.name as memberName, 
+      mem1.avatar as memberAvatar,
+      msg2.id as messageId,
+      msg2.timestamp as messageTimestamp,
+      msg2.content as messageContent
   
-  FROM members
-  LEFT JOIN servermembers 
-  ON members.id = servermembers.memberid 
-  INNER JOIN servers on servers.id = serverMembers.serverId
-  INNER JOIN channels on servers.id = channels.serverId
-  FULL OUTER JOIN messages on messages.channelId = channels.id and messages.memberId = members.id
-  WHERE servermembers.serverid 
-  IN
-  (
-    SELECT 
-      servermembers.serverid 
-  
-    FROM servermembers 
-    LEFT JOIN members on members.id = servermembers.memberid
-    WHERE members.name = '${username}'
-  )
-  
-  ORDER BY servers.name, channels.name, members.name, messages.timestamp;`
+  FROM members mem1
+  JOIN serverMembers srvmem1 ON srvmem1.memberId = mem1.id 
+  JOIN servers srv ON srv.id = srvmem1.serverId
+  JOIN channels ch ON ch.serverId = srv.id
+  JOIN servermembers srvmem2 ON srvmem2.serverId = srv.id
+  JOIN members mem2 ON mem2.id = srvmem2.memberId
+  LEFT JOIN LATERAL
+    (
+      SELECT * from messages msg1
+        WHERE msg1.channelId = ch.id
+        ORDER BY msg1.timestamp DESC
+        LIMIT 50 
+    ) 
+  AS msg2 ON true
+  WHERE mem2.name = '${username}' and msg2.memberId = mem1.id
+  ORDER BY srv.name, ch.name, msg2.timestamp, mem1.name;`
     );
 
     if (response.rows.length === 0) return false;
@@ -158,13 +157,7 @@ module.exports = async userInfo => {
                           avatar: row.memberavatar
                         }
                       ]
-                    : [
-                        {
-                          id: row.memberid,
-                          name: row.membername,
-                          avatar: row.memberavatar
-                        }
-                      ]
+                    : [...data.servers[indexOfServer].members]
               },
               ...data.servers.slice(indexOfServer + 1)
             ]
@@ -230,14 +223,7 @@ module.exports = async userInfo => {
                             avatar: row.memberavatar
                           }
                         ]
-                      : [
-                          ...data.servers[indexOfServer].members,
-                          {
-                            id: row.memberid,
-                            name: row.membername,
-                            avatar: row.memberavatar
-                          }
-                        ]
+                      : [...data.servers[indexOfServer].members]
                 },
                 ...data.servers.slice(indexOfServer + 1)
               ]
@@ -294,14 +280,7 @@ module.exports = async userInfo => {
                             avatar: row.memberavatar
                           }
                         ]
-                      : [
-                          ...data.servers[indexOfServer].members,
-                          {
-                            id: row.memberid,
-                            name: row.membername,
-                            avatar: row.memberavatar
-                          }
-                        ]
+                      : [...data.servers[indexOfServer].members]
                 },
                 ...data.servers.slice(indexOfServer + 1)
               ]
@@ -311,6 +290,7 @@ module.exports = async userInfo => {
       }
     });
     await database.end();
+
     return data;
   } catch (error) {
     console.error(error);

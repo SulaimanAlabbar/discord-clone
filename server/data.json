@@ -1,0 +1,601 @@
+{
+  "id": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d",
+  "name": "User112233",
+  "avatar": "https://i.imgur.com/L8RLq3o.jpg",
+  "servers": [
+    {
+      "id": "87659dd0-5f8d-433f-8c2a-ae38ecdc0231",
+      "name": "Heavy",
+      "icon": "public/images/c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d_1542494025595_Sadistic_Intent.jpg",
+      "channels": [
+        {
+          "id": "3b51464b-58ae-4ab8-b9ab-b24b9fbd72ca",
+          "name": "main",
+          "topic": "topic",
+          "inputText": "",
+          "userScroll": false,
+          "unreadMessages": false,
+          "messages": [
+            {
+              "id": "5ccad7d7-7b6f-4399-8423-ddf723c9da56",
+              "timestamp": "2018-11-18T03:34:14.448Z",
+              "content": "ewew",
+              "memberId": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d"
+            },
+            {
+              "id": "124b3d71-05c3-423f-b3dd-9c8b767fe296",
+              "timestamp": "2018-11-18T03:34:16.282Z",
+              "content": "rre",
+              "memberId": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d"
+            },
+            {
+              "id": "9fe8130b-abc6-46a5-a40d-993cfa3d324f",
+              "timestamp": "2018-11-18T22:09:13.598Z",
+              "content": "yes",
+              "memberId": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d"
+            }
+          ]
+        }
+      ],
+      "members": [
+        {
+          "id": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d",
+          "name": "User112233",
+          "avatar": "https://i.imgur.com/L8RLq3o.jpg"
+        }
+      ]
+    },
+    {
+      "id": "f1539092-5fc9-4e9d-b82d-ca4d6dbe95cf",
+      "name": "server1",
+      "icon": "https://i.imgur.com/3XzFlxU.png",
+      "channels": [
+        {
+          "id": "e4588018-f901-4a15-98d5-491b7576589c",
+          "name": "first-channel",
+          "topic": "Topic of first channel",
+          "inputText": "",
+          "userScroll": false,
+          "unreadMessages": false,
+          "messages": [
+            {
+              "id": "7956f8a0-f95f-4cf6-ba9f-01169f7b5530",
+              "timestamp": "2018-11-18T17:19:03.163Z",
+              "content": "5",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f8004ea7-b894-4f62-a114-a2e9696bb056",
+              "timestamp": "2018-11-18T17:19:03.692Z",
+              "content": "6",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "d66bd270-a3ae-489f-b9e9-2f1b3919ca42",
+              "timestamp": "2018-11-18T17:19:04.257Z",
+              "content": "7",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "ef347df3-7848-4ed0-81f2-c8a0da0c6913",
+              "timestamp": "2018-11-18T17:19:04.747Z",
+              "content": "8",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f7bbb6e3-0034-4fb6-a552-94c669d27ce5",
+              "timestamp": "2018-11-18T17:19:05.239Z",
+              "content": "9",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "c295b1fb-dc74-43de-95cf-3c71eabc8a1f",
+              "timestamp": "2018-11-18T17:19:06.268Z",
+              "content": "10",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "142f6fda-c30e-40d4-b016-29ddc5ebb03e",
+              "timestamp": "2018-11-18T17:19:07.071Z",
+              "content": "11",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "c77c74b9-c7b2-4075-9fec-0c6cda6e7ec9",
+              "timestamp": "2018-11-18T17:19:07.795Z",
+              "content": "12",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "768cc3b7-7899-4f1d-b7cd-0f7c49ecef4c",
+              "timestamp": "2018-11-18T17:19:08.520Z",
+              "content": "13",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "0870c1a2-a779-4780-83e3-f7b653ecde1f",
+              "timestamp": "2018-11-18T17:19:09.948Z",
+              "content": "14",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "e9ac39a7-6769-421a-83bb-bb2a57e3db7a",
+              "timestamp": "2018-11-18T17:19:10.645Z",
+              "content": "15",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "8c443c6a-8954-44ff-84ae-09c1e7b65df9",
+              "timestamp": "2018-11-18T17:19:11.382Z",
+              "content": "16",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "a812d976-e581-4dbf-afd3-339df4f53276",
+              "timestamp": "2018-11-18T17:19:13.489Z",
+              "content": "17",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "5ef313cb-5237-496d-bdeb-b661b2a82695",
+              "timestamp": "2018-11-18T17:19:14.507Z",
+              "content": "18",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "cc6fccab-d557-46f6-a6e4-81ada7552cfc",
+              "timestamp": "2018-11-18T17:19:15.194Z",
+              "content": "20",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f1765ef9-2443-4d2b-84ab-32a97eea6d15",
+              "timestamp": "2018-11-18T17:19:15.763Z",
+              "content": "21",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "8eef2f0f-04db-48df-82f4-bc1440cba540",
+              "timestamp": "2018-11-18T17:19:16.889Z",
+              "content": "22",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "3c8454e9-adfe-47fe-a05b-d3e407ecb224",
+              "timestamp": "2018-11-18T17:19:17.487Z",
+              "content": "23",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "ff0c0780-255d-4f4f-84f2-d12a56561189",
+              "timestamp": "2018-11-18T17:19:18.114Z",
+              "content": "24",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "4a901edc-f466-44c0-9756-9c31bd206ee9",
+              "timestamp": "2018-11-18T17:19:18.744Z",
+              "content": "25",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "06e9b5e0-5dcf-48c8-8aa5-e47cc299a137",
+              "timestamp": "2018-11-18T17:19:19.367Z",
+              "content": "26",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "942d8303-9638-4bb7-9a7e-c19159987989",
+              "timestamp": "2018-11-18T17:19:19.996Z",
+              "content": "27",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "0ad2dee8-233d-4f91-97b7-657cd7e99187",
+              "timestamp": "2018-11-18T17:19:21.086Z",
+              "content": "28",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "b2482a67-53c2-499d-960c-4fe599ee837e",
+              "timestamp": "2018-11-18T17:19:22.051Z",
+              "content": "29",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "45da7dc6-c19f-4049-9c49-cca4f17ca861",
+              "timestamp": "2018-11-18T17:19:23.369Z",
+              "content": "30",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "538cf71c-547b-43ef-bcaf-07a1ed007945",
+              "timestamp": "2018-11-18T17:19:25.130Z",
+              "content": "31",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "c7a9eda4-9407-46b0-ac5c-c36787cea8b2",
+              "timestamp": "2018-11-18T17:19:26.214Z",
+              "content": "32",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "fc5d2e8f-ff48-4496-8442-01487ca60128",
+              "timestamp": "2018-11-18T17:19:26.880Z",
+              "content": "33",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "b9e7474b-2ffc-4e77-a5a8-272029c0163e",
+              "timestamp": "2018-11-18T17:19:28.203Z",
+              "content": "34",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "218733d2-cc45-444d-9646-565b3e5d53b9",
+              "timestamp": "2018-11-18T17:19:29.011Z",
+              "content": "35",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "833ce004-f59f-4f90-83ee-093b215da92c",
+              "timestamp": "2018-11-18T17:19:29.744Z",
+              "content": "36",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "938699da-4e33-493e-a868-1a122c7f273c",
+              "timestamp": "2018-11-18T17:19:30.504Z",
+              "content": "37",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "ce85b7e3-0efa-48b8-9527-05a75dc3e15c",
+              "timestamp": "2018-11-18T17:19:31.218Z",
+              "content": "38",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "7981f3d2-23d1-4659-9d62-33ed60748ecb",
+              "timestamp": "2018-11-18T17:19:32.141Z",
+              "content": "39",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "7a8fb2a9-30b6-41b1-86e5-271bac399897",
+              "timestamp": "2018-11-18T17:19:33.445Z",
+              "content": "40",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f3ae2daf-617a-49e5-bc71-fc6e9c53ddcf",
+              "timestamp": "2018-11-18T17:19:34.386Z",
+              "content": "41",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "4ca2ecc7-c47e-4291-b227-8730e49b351d",
+              "timestamp": "2018-11-18T17:19:35.432Z",
+              "content": "42",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "efd54d65-e0fb-4688-b4cc-54a40e95b472",
+              "timestamp": "2018-11-18T17:19:36.957Z",
+              "content": "43",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "44355f76-903f-4458-8b57-2fb5cba722fb",
+              "timestamp": "2018-11-18T17:19:37.684Z",
+              "content": "44",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "541a92a3-7702-49ab-9882-aa5336cbf5bc",
+              "timestamp": "2018-11-18T17:19:38.355Z",
+              "content": "45",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "4a8ef9be-fb49-42b2-bf2a-f0fd93a90bc5",
+              "timestamp": "2018-11-18T17:19:39.280Z",
+              "content": "46",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f4968112-aa43-45bf-a22a-40d31f44a4b5",
+              "timestamp": "2018-11-18T17:19:39.985Z",
+              "content": "47",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "ea8dabb5-79bd-4657-93b2-dcb271263acc",
+              "timestamp": "2018-11-18T17:19:40.785Z",
+              "content": "48",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f30b129e-1cb2-4c0f-8435-09751f0cfa69",
+              "timestamp": "2018-11-18T17:19:41.552Z",
+              "content": "49",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "01ce6606-78f9-4495-b468-27695a610a68",
+              "timestamp": "2018-11-18T17:19:42.713Z",
+              "content": "50",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "aaf779f8-1292-4895-b93c-b5a2808bdb65",
+              "timestamp": "2018-11-18T17:43:51.687Z",
+              "content": "12",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "b3a7b904-1e11-4841-b911-5df2afb41a14",
+              "timestamp": "2018-11-18T22:07:53.247Z",
+              "content": "hello",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "7b34fa49-5247-40cc-854e-40ad54131821",
+              "timestamp": "2018-11-18T22:09:24.481Z",
+              "content": "no",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "2c71772d-d025-42eb-8ec2-937fa67d13da",
+              "timestamp": "2018-11-18T22:09:47.605Z",
+              "content": "hg",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "068086a7-8cfa-4ad2-8bc8-4db6f22510d2",
+              "timestamp": "2018-11-18T22:12:25.414Z",
+              "content": "lk",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            }
+          ]
+        },
+        {
+          "id": "39c4ca90-9ecf-4970-bf92-c341d0017f1d",
+          "name": "second-channel",
+          "topic": "Topic of second channel",
+          "inputText": "",
+          "userScroll": false,
+          "unreadMessages": false,
+          "messages": [
+            {
+              "id": "cda30c3d-96f0-47eb-a8f0-2761e636d92d",
+              "timestamp": "2018-11-03T11:24:15.883Z",
+              "content": "abcdefg",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            }
+          ]
+        },
+        {
+          "id": "b68207e8-67ab-489a-92d7-7191f81adf02",
+          "name": "third-channel",
+          "topic": "Topic of third channel",
+          "inputText": "",
+          "userScroll": false,
+          "unreadMessages": false,
+          "messages": [
+            {
+              "id": "b8de35a0-0b21-4c0d-b8bd-92083355ca96",
+              "timestamp": "2018-11-03T11:06:27.818Z",
+              "content": "123456789",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "ba634fdc-8c6b-4f76-a19f-e506afb585f9",
+              "timestamp": "2018-11-18T05:08:36.836Z",
+              "content": "gf",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "31bb0c4b-5a84-48d7-b3a3-a2aa73941fe7",
+              "timestamp": "2018-11-18T05:08:37.523Z",
+              "content": "gf",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "8b26efa2-9844-4db0-a6dc-5ff0f4172c69",
+              "timestamp": "2018-11-18T05:08:37.820Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "b62a00ed-53db-4752-9be1-60ae94de6c70",
+              "timestamp": "2018-11-18T05:08:38.068Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "5058ea43-ffed-478e-9a27-d8f7d542a860",
+              "timestamp": "2018-11-18T05:08:38.363Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "678e5abf-bebb-4e50-87bb-2dca51652e5d",
+              "timestamp": "2018-11-18T05:08:38.716Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "5600e37c-61e6-4ee5-9bf9-f5bcbb6cac62",
+              "timestamp": "2018-11-18T05:08:39.013Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "581f6967-8662-4268-ac2b-490b15f317d9",
+              "timestamp": "2018-11-18T05:08:39.321Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "75ae6818-18d6-4a6c-ba99-ed482358f30a",
+              "timestamp": "2018-11-18T05:08:39.644Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "29db72d9-c2b2-46e9-b142-e6c92dcea54d",
+              "timestamp": "2018-11-18T05:08:40.018Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "874a040d-c723-4617-adf9-047d9787be55",
+              "timestamp": "2018-11-18T05:08:40.531Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "132b6b01-de81-4486-b43b-e3b03bd240a6",
+              "timestamp": "2018-11-18T05:08:40.969Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "686a404c-e315-4142-9d81-5bab533dee4b",
+              "timestamp": "2018-11-18T05:08:41.365Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "7474015e-8574-4256-a0e2-5e51fc41b823",
+              "timestamp": "2018-11-18T05:08:41.758Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "2d78f231-767e-4e67-ac5d-3c3b75b75871",
+              "timestamp": "2018-11-18T05:08:42.174Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "8cfbe045-567e-47fa-abcc-2be7b469c344",
+              "timestamp": "2018-11-18T05:08:42.520Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "76746fe8-5ea7-4ca3-aa44-b471a080232e",
+              "timestamp": "2018-11-18T05:08:43.088Z",
+              "content": "g",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "d90fd717-7705-4850-beed-07f7d0cca687",
+              "timestamp": "2018-11-18T05:08:43.540Z",
+              "content": "t",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "2601eb90-db02-4eeb-9274-3b3b34cfb91c",
+              "timestamp": "2018-11-18T05:08:44.230Z",
+              "content": "y",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "f30b2feb-9cdd-42cd-9890-42b57bc39321",
+              "timestamp": "2018-11-18T05:08:45.081Z",
+              "content": "6",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "32936078-2c48-458d-bdab-142fe526faf3",
+              "timestamp": "2018-11-18T05:08:45.623Z",
+              "content": "7",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            },
+            {
+              "id": "7dc61d6a-496f-420a-8352-a2251728008b",
+              "timestamp": "2018-11-18T05:08:46.101Z",
+              "content": "8",
+              "memberId": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3"
+            }
+          ]
+        }
+      ],
+      "members": [
+        {
+          "id": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d",
+          "name": "User112233",
+          "avatar": "https://i.imgur.com/L8RLq3o.jpg"
+        },
+        {
+          "id": "eab683ec-551a-4a35-a75b-9bda5f5da77c",
+          "name": "User5566",
+          "avatar": "https://i.imgur.com/l4wnhCz.png"
+        },
+        {
+          "id": "12c23909-9b4e-4e56-a4b7-ea78f697a8c3",
+          "name": "User6677",
+          "avatar": "https://i.imgur.com/iyXex3F.png"
+        }
+      ]
+    },
+    {
+      "id": "4b629148-c539-4f87-ba07-2592358c8e14",
+      "name": "server2",
+      "icon": "https://i.imgur.com/7kBg3tL.png",
+      "channels": [
+        {
+          "id": "c028b1ae-08cf-4f9c-bce7-18a01626558e",
+          "name": "first-channel",
+          "topic": "Topic of first channel",
+          "inputText": "",
+          "userScroll": false,
+          "unreadMessages": false,
+          "messages": [
+            {
+              "id": "46a16de5-96c5-4a45-8981-b4fa41b8d703",
+              "timestamp": "2018-11-18T06:56:39.990Z",
+              "content": "gfgf",
+              "memberId": "d4ae2772-e21c-4699-ba0d-69f6db3332bc"
+            }
+          ]
+        },
+        {
+          "id": "06bfd645-5bfb-4690-8624-b45d23aa75bc",
+          "name": "second-channel",
+          "topic": "Topic of second channel",
+          "inputText": "",
+          "userScroll": false,
+          "unreadMessages": false,
+          "messages": []
+        }
+      ],
+      "members": [
+        {
+          "id": "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d",
+          "name": "User112233",
+          "avatar": "https://i.imgur.com/L8RLq3o.jpg"
+        },
+        {
+          "id": "d38b1b0e-1cde-48ef-9e5b-293b8cda087f",
+          "name": "User6767",
+          "avatar": "https://i.imgur.com/HnTWfFc.png"
+        },
+        {
+          "id": "80c59215-d22f-49ba-ae0e-ce5ed93858c1",
+          "name": "User7788",
+          "avatar": "https://i.imgur.com/RgNEyri.png"
+        },
+        {
+          "id": "d4ae2772-e21c-4699-ba0d-69f6db3332bc",
+          "name": "User8899",
+          "avatar": "https://i.imgur.com/LZLjB5v.png"
+        }
+      ]
+    }
+  ]
+}

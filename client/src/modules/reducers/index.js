@@ -16,7 +16,7 @@ import {
 const initialState = {
   socket: false,
   loggedIn: false,
-  currentPage: "Loading",
+  currentPage: "LoadingPage",
   inputtedLoginInfo: false
 };
 
@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         activeServerIndex: action.index,
+        smoothScroll: false,
         inviteModalVisible: false
       };
     case SET_ACTIVE_CHANNEL:
@@ -35,7 +36,8 @@ export default (state = initialState, action) => {
           ...state.activeChannelsIndices.slice(0, state.activeServerIndex),
           action.index,
           ...state.activeChannelsIndices.slice(state.activeServerIndex + 1)
-        ]
+        ],
+        smoothScroll: false
       };
     case SET_INPUTPANEL_TEXT:
       return {
@@ -97,7 +99,8 @@ export default (state = initialState, action) => {
             ]
           },
           ...state.servers.slice(action.serverIndex + 1)
-        ]
+        ],
+        smoothScroll: true
       };
     case SET_PAGE:
       return {
@@ -117,6 +120,7 @@ export default (state = initialState, action) => {
         loggedIn: true,
         activeServerIndex: action.activeServerIndex,
         activeChannelsIndices: action.activeChannelsIndices,
+        smoothScroll: false,
         serverModalVisible: action.visibility,
         serverModalView: action.view
       };
@@ -146,7 +150,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         servers: [...state.servers, action.newServer],
-        activeChannelsIndices: [...state.activeChannelsIndices, 0]
+        activeChannelsIndices: [...state.activeChannelsIndices, 0],
+        smoothScroll: false
       };
     default:
       return state;

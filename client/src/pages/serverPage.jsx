@@ -9,79 +9,8 @@ import ChannelHeader from "../components/channelHeader";
 import ChatView from "../components/chatView";
 import MemberList from "../components/memberList";
 import InputPanel from "../components/inputPanel";
-// import PrePosedServerCJModal from "../components/serverCJModal";
 import ServerCJModal from "../components/serverCJModal";
 import InviteModal from "../components/inviteModal";
-//import posed, { PoseGroup } from "react-pose";
-import styled from "styled-components";
-
-const Container = styled.section`
-  display: grid;
-  grid-template-columns: 88px 240px minmax(auto, 100%) 233px;
-  grid-template-rows: 48px minmax(auto, 835px) 40px 52px;
-  grid-template-areas:
-    "ServersBar ServerHeader ChannelHeader ChannelHeader"
-    "ServersBar ChannelsBar ChatView MemberList"
-    "ServersBar ChannelsBar InputPanel MemberList"
-    "ServersBar UserPanel InputPanel MemberList";
-
-  .sb {
-    grid-area: ServersBar;
-  }
-  .sh {
-    grid-area: ServerHeader;
-  }
-  .cb {
-    grid-area: ChannelsBar;
-  }
-
-  .usp {
-    grid-area: UserPanel;
-  }
-  .ch {
-    grid-area: ChannelHeader;
-  }
-  .cv {
-    grid-area: ChatView;
-    word-break: break-word;
-    overflow: hidden;
-  }
-  .ip {
-    grid-area: InputPanel;
-  }
-  .ml {
-    grid-area: MemberList;
-  }
-
-  .shade {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-`;
-
-// const Shade = posed.div({
-//   enter: { opacity: 1 },
-//   exit: { opacity: 0 }
-// });
-
-// const ServerCJModal = posed(PrePosedServerCJModal)({
-//   enter: {
-//     opacity: 1,
-//     delay: 50,
-//     transition: {
-//       default: { duration: 50 }
-//     }
-//   },
-//   exit: {
-//     opacity: 0,
-//     delay: 50,
-//     transition: { duration: 50 }
-//   }
-// });
 
 class ServerPage extends Component {
   constructor() {
@@ -115,27 +44,38 @@ class ServerPage extends Component {
     } = this.props;
 
     return (
-      <Container {...this.props}>
-        <ServersBar
-          className="sb"
-          servers={servers}
-          activeServerIndex={activeServerIndex}
-        />
-        <ServerHeader className="sh" activeServerName={activeServerName} />
-        <ChannelsBar
-          className="cb"
-          channels={channels}
-          activeChannelIndex={activeChannelIndex}
-        />
-        <UserPanel className="usp" username={username} avatar={avatar} />
-        <ChannelHeader className="ch" activeChannelTopic={activeChannelTopic} />
-        <ChatView className="cv" members={members} messages={messages} />
-        <InputPanel className="ip" activeChannelName={activeChannelName} />
-        <MemberList className="ml" members={members} />
+      <div className="serverPage--container">
+        <div className="serverPage--serversBar">
+          <ServersBar servers={servers} activeServerIndex={activeServerIndex} />
+        </div>
+        <div className="serverPage--serverHeader">
+          <ServerHeader activeServerName={activeServerName} />
+        </div>
+        <div className="serverPage--channelsBar">
+          <ChannelsBar
+            channels={channels}
+            activeChannelIndex={activeChannelIndex}
+          />
+        </div>
+        <div className="serverPage--userPanel">
+          <UserPanel username={username} avatar={avatar} />
+        </div>
+        <div className="serverPage--channelHeader">
+          <ChannelHeader activeChannelTopic={activeChannelTopic} />
+        </div>
+        <div className="serverPage--chatView">
+          <ChatView members={members} messages={messages} />
+        </div>
+        <div className="serverPage--inputPanel">
+          <InputPanel activeChannelName={activeChannelName} />
+        </div>
+        <div className="serverPage--memberList">
+          <MemberList members={members} />
+        </div>
         {serverModalVisible && [
           <div
             key="shade"
-            className="shade"
+            className="serverPage--serverCJShade"
             onClick={() => this.closeModal("")}
           />,
           <ServerCJModal
@@ -145,7 +85,7 @@ class ServerPage extends Component {
           />
         ]}
         {inviteModalVisible && <InviteModal inviteLink={inviteLink} />}
-      </Container>
+      </div>
     );
   }
 }

@@ -74,6 +74,7 @@ export const setReadyCreateServer = ready => ({
   type: SET_READY_CREATE_SERVER,
   ready
 });
+
 export const addServer = newServer => ({
   type: ADD_SERVER,
   newServer
