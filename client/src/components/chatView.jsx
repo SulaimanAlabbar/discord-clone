@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actionCreators from "../modules/actions";
+import fetchMessages from "../modules/socket/serverCom/fetchMessages";
 
 //scroll to bottom when user sends a message
 //and keep at bottom unless user scrolls
@@ -22,6 +24,7 @@ class ChatView extends Component {
     super();
 
     this.scrollRef = React.createRef();
+    this.scrollHandle = this.scrollHandle.bind(this);
   }
 
   componentDidMount() {
@@ -32,8 +35,12 @@ class ChatView extends Component {
   }
 
   componentDidUpdate = () => {
+    console.log("UPDATE");
+
     const scrollRef = this.scrollRef.current;
-    const { id, messages, smoothScroll } = this.props;
+    const { id, messages, smoothScroll, messagesFetchingStatus } = this.props;
+    if (messagesFetchingStatus === true) return;
+
     if (!smoothScroll) {
       scrollRef.scrollTo({ top: scrollRef.scrollHeight, behavior: "auto" });
     } else if (
@@ -43,27 +50,32 @@ class ChatView extends Component {
     ) {
       scrollRef.scrollTo({ top: scrollRef.scrollHeight, behavior: "smooth" });
     }
-
-    // //this.scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    // // console.log(this.scrollRef.current.scrollTop); //
-    // // console.log(this.scrollRef.current.scrollHeight); //offsetHeight 840
-    // // console.log(this.scrollRef.current.offsetHeight);
-    // // this.scrollRef.current.
-
-    // if (
-    //   scrollRef.scrollHeight - scrollRef.offsetHeight - scrollRef.scrollTop <=
-    //   500
-    // )
-    //   scrollRef.scrollTo({ top: scrollRef.scrollHeight, behavior: "smooth" });
-
-    console.log("UPDATE");
   };
+
+  scrollHandle() {
+    const scrollRef = this.scrollRef.current;
+    const { messages, messagesFetchingStatus } = this.props;
+
+    if (
+      scrollRef.scrollTop < 200 &&
+      messages.length >= 50 &&
+      messagesFetchingStatus === false
+    ) {
+      this.props.setMessagesFetchingStatus(true);
+      fetchMessages();
+    }
+  }
+  //set fetching to false again when retrieving messages
 
   render() {
     const { members, messages } = this.props;
     return (
       <div className="chatView--container">
-        <ul className="chatView--ul" ref={this.scrollRef}>
+        <ul
+          className="chatView--ul"
+          ref={this.scrollRef}
+          onScroll={this.scrollHandle}
+        >
           {messages.map((message, index) => {
             const member = members.find(
               member => member.id === message.memberId
@@ -107,10 +119,13 @@ const mapStateToProps = state => ({
     state.servers[state.activeServerIndex].channels[
       state.activeChannelsIndices[state.activeServerIndex]
     ].messages,
-  smoothScroll: state.smoothScroll
+  smoothScroll: state.smoothScroll,
+  messagesFetchingStatus: state.messagesFetchingStatus
 });
+
+const mapDispatchToProps = actionCreators;
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(ChatView);

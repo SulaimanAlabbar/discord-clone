@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../modules/actions";
-import Login from "../modules/socket/serverCom/login";
+import login from "../modules/socket/serverCom/login";
 
 class LoginPage extends Component {
   constructor() {
@@ -19,7 +19,7 @@ class LoginPage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    Login(this.state.name);
+    login(this.state.name);
   }
 
   render() {

@@ -10,7 +10,9 @@ import {
   SET_SERVERMODAL_VIEW,
   SET_INVITEMODAL_VISIBILITY,
   SET_READY_CREATE_SERVER,
-  ADD_SERVER
+  ADD_SERVER,
+  SET_MESSAGES_FETCHING_STATUS,
+  ADD_FETCHED_MESSAGES
 } from "../actions/actions";
 
 const initialState = {
@@ -122,7 +124,10 @@ export default (state = initialState, action) => {
         activeChannelsIndices: action.activeChannelsIndices,
         smoothScroll: false,
         serverModalVisible: action.visibility,
-        serverModalView: action.view
+        serverModalView: action.view,
+        messagesFetchingStatus: action.messagesFetchingStatus,
+        messagesFetchingServerIndex: null,
+        messagesFetchingChannelIndex: null
       };
     case SET_SERVERMODAL_VISIBILITY:
       return {
@@ -152,6 +157,46 @@ export default (state = initialState, action) => {
         servers: [...state.servers, action.newServer],
         activeChannelsIndices: [...state.activeChannelsIndices, 0],
         smoothScroll: false
+      };
+    case SET_MESSAGES_FETCHING_STATUS:
+      return {
+        ...state,
+        messagesFetchingStatus: action.status,
+        smoothScroll: true,
+        messagesFetchingServerIndex: state.activeServerIndex,
+        messagesFetchingChannelIndex:
+          state.activeChannelsIndices[state.activeServerIndex]
+      };
+    case ADD_FETCHED_MESSAGES:
+      return {
+        ...state,
+        servers: [
+          ...state.servers.slice(0, state.messagesFetchingServerIndex),
+          {
+            ...state.servers[state.messagesFetchingServerIndex],
+            channels: [
+              ...state.servers[
+                state.messagesFetchingServerIndex
+              ].channels.slice(0, state.messagesFetchingChannelIndex),
+              {
+                ...state.servers[state.messagesFetchingServerIndex].channels[
+                  state.messagesFetchingChannelIndex
+                ],
+                messages: [
+                  ...action.messages,
+                  ...state.servers[state.messagesFetchingServerIndex].channels[
+                    state.messagesFetchingChannelIndex
+                  ].messages
+                ]
+              },
+              ...state.servers[
+                state.messagesFetchingServerIndex
+              ].channels.slice(state.messagesFetchingChannelIndex + 1)
+            ]
+          },
+          ...state.servers.slice(state.messagesFetchingServerIndex + 1)
+        ],
+        messagesFetchingStatus: false
       };
     default:
       return state;

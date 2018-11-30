@@ -1,28 +1,42 @@
 //import config from "../../config.json";
 import { store } from "../../index";
 import * as actionCreators from "../actions";
-const socket = new WebSocket(`ws://localhost:5000`);
 // const io = new WebSocket(`ws://${config.serverIp}`);
+import login from "./serverCom/login";
+const socket = new WebSocket(`ws://localhost:5000`);
 
 export default async () => {
   try {
-    socket.onopen = () => {
+    socket.onopen = async () => {
       console.log("connected to server");
       store.dispatch(actionCreators.setSocket(socket));
-      store.dispatch(actionCreators.setPage("LoginPage"));
+
+      if (localStorage.getItem("loginInfo_id") !== null) {
+        login(localStorage.getItem("loginInfo_name"));
+      } else {
+        store.dispatch(actionCreators.setPage("LoginPage"));
+      }
 
       socket.onmessage = msg => {
         const messageAction = JSON.parse(msg.data).action;
         const messagePayload = JSON.parse(msg.data).payload;
 
         switch (messageAction) {
-          case "LOGIN_FAIL":
+          case "LOGIN_FAIL": {
+            store.dispatch(actionCreators.setPage("LoginPage"));
+            localStorage.clear();
             break;
+          }
 
-          case "LOGIN_SUCCESS":
+          case "LOGIN_SUCCESS": {
             store.dispatch(actionCreators.setUserConfig(messagePayload));
             store.dispatch(actionCreators.setPage("ServerPage"));
+            console.log(messagePayload);
+            localStorage.clear();
+            localStorage.setItem("loginInfo_id", messagePayload.id);
+            localStorage.setItem("loginInfo_name", messagePayload.name);
             break;
+          }
 
           case "MESSAGE": {
             const { servers } = store.getState();
@@ -92,6 +106,31 @@ export default async () => {
                 );
               }, 100);
             }
+            break;
+          }
+          case "FETCHED_MESSAGES": {
+            console.log("PAYLOAD: ", messagePayload);
+            //messageid instead of id
+            //const indexOfChannel =
+            const fetchedMessages = messagePayload.map(mp => ({
+              id: mp.id,
+              timestamp: mp.timestamp,
+              content: mp.content,
+              memberId: mp.memberid
+            }));
+
+            store.dispatch(actionCreators.addFetchedMessages(fetchedMessages));
+            // store.dispatch(
+            //   actionCreators.addFetchedMessages([
+            //     {
+            //       id: "49d3d8b9-b730-4730-8278-ad75538d6997",
+            //       timestamp: "2018-11-19T00:33:52.287Z",
+            //       content: "abc",
+            //       memberId: "c3aa8fd4-5161-48d8-a7b6-a73a337b3a6d"
+            //     }
+            //   ])
+            // );
+            // store.dispatch(actionCreators.setServerModalView("createjoin"));
             break;
           }
           default:

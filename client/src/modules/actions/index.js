@@ -10,7 +10,9 @@ import {
   SET_SERVERMODAL_VIEW,
   SET_INVITEMODAL_VISIBILITY,
   SET_READY_CREATE_SERVER,
-  ADD_SERVER
+  ADD_SERVER,
+  SET_MESSAGES_FETCHING_STATUS,
+  ADD_FETCHED_MESSAGES
 } from "./actions";
 
 export const setActiveServer = index => ({
@@ -52,7 +54,8 @@ export const setUserConfig = userConfig => ({
   activeChannelsIndices: new Array(userConfig.servers.length).fill(0),
   serverModalVisible: false,
   serverModalView: "",
-  inviteModalVisible: false
+  inviteModalVisible: false,
+  messagesFetchingStatus: false
 });
 
 export const setServerModalVisibility = visibility => ({
@@ -78,4 +81,14 @@ export const setReadyCreateServer = ready => ({
 export const addServer = newServer => ({
   type: ADD_SERVER,
   newServer
+});
+
+export const setMessagesFetchingStatus = status => ({
+  type: SET_MESSAGES_FETCHING_STATUS,
+  status
+});
+
+export const addFetchedMessages = messages => ({
+  type: ADD_FETCHED_MESSAGES,
+  messages
 });

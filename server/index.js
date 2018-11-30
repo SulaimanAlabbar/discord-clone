@@ -7,6 +7,7 @@ const verifyUser = require("./database/verifyUser");
 const addMessage = require("./database/addMessage");
 const createServer = require("./database/createServer");
 const joinServer = require("./database/joinServer");
+const fetchMessages = require("./database/fetchMessages");
 const state = require("./state");
 const expressPort = 4000;
 const wsPort = 5000;
@@ -163,6 +164,21 @@ try {
             JSON.stringify({
               action: "SERVER_CREATED",
               payload: newServer
+            })
+          );
+          break;
+        }
+        case "FETCH_MESSAGES": {
+          const indexOfSock = state.sockets.findIndex(
+            sock => sock.socket === socket
+          );
+
+          const fetchedMessages = await fetchMessages(messagePayload);
+
+          socket.send(
+            JSON.stringify({
+              action: "FETCHED_MESSAGES",
+              payload: fetchedMessages
             })
           );
 
